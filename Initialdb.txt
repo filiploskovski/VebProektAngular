@@ -5,6 +5,8 @@ BAZA:
 		4. Regular Expense
 		5. Expense type
 		6. Debt
+		7. Income (da se definiraat)
+		8. Income Type (da se definiraat)
 		
 
 	Debt:
