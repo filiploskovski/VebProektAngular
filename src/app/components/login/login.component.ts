@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-
+import { FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +10,19 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private location: Location) { }
+  loginForm = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+  });
+
+  constructor(private router: Router,private auth: AuthService) { }
 
   ngOnInit() {
   }
 
-
-  click(): void {
+  login(): void {
+    //
+    this.auth.setToken('token');
     this.router.navigate(['home']);
   }
-
 }
