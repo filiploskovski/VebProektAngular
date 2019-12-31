@@ -16,11 +16,11 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
-  addItemToLocalStorage(key: string, value: string) {
+  addItemToLocalStorage(key: string, value: string): void {
     localStorage.setItem(key, value);
   }
 
-  deleteItemFromLocalStorage(key: string) {
+  deleteItemFromLocalStorage(key: string): void {
     localStorage.removeItem(key);
   }
 }

@@ -15,13 +15,12 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  constructor(private router: Router,private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
   }
 
   login(): void {
-    //
     this.auth.setToken('token');
     this.router.navigate(['home']);
   }
