@@ -7,15 +7,15 @@
                 aria-selected="true">Details</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="account-types-tab" data-toggle="tab" href="#account-types" role="tab" aria-controls="account-types"
-                aria-selected="false">Account types</a>
+            <a class="nav-link" id="expense-types-tab" data-toggle="tab" href="#expense-types" role="tab" aria-controls="expense-types"
+                aria-selected="false">Expense types</a>
         </li>
     </ul>
 
     <!-- Tab 1 Form -->
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
-            <form [formGroup]="accountTypeForm" (ngSubmit)="save()">
+            <form [formGroup]="expenseTypeForm" (ngSubmit)="save()">
                 
                 <div class="form-group row">
                     <label for="nameLabel" class="col-sm-2 col-form-label">Name</label>
@@ -24,14 +24,14 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-dark btn-sm gformButtonCss" [disabled]="!accountTypeForm.valid">Submit</button>
+                <button type="submit" class="btn btn-dark btn-sm gformButtonCss" [disabled]="!expenseTypeForm.valid">Submit</button>
 
             </form>
     <!-- End -->
         </div>
 
 <!-- Tab 2 Data Table -->
-        <div class="tab-pane fade" id="account-types" role="tabpanel" aria-labelledby="account-types-tab">
+        <div class="tab-pane fade" id="expense-types" role="tabpanel" aria-labelledby="expense-types-tab">
 
             <table datatable [dtOptions]="dtOptions" class="row-border hover table">
                 <thead>
