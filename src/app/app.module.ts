@@ -14,6 +14,7 @@ import { AccountComponent } from './components/account/account.component';
 
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
+import { AccountTypeComponent } from './components/account-type/account-type.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavigationComponent,
     LoginComponent,
     HomeComponent,
-    AccountComponent
+    AccountComponent,
+    AccountTypeComponent
   ],
   imports: [
     BrowserModule,
