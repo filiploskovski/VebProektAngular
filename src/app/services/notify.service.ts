@@ -7,7 +7,8 @@ import { ToastrService, IndividualConfig } from 'ngx-toastr';
 export class NotifyService {
 
   public toastSettings: Partial<IndividualConfig> = {
-    timeOut: 5000
+    timeOut: 5000,
+    closeButton: true
   };
 
   constructor(private toastr: ToastrService) { }

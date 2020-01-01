@@ -1,0 +1,1 @@
+// ID			FK_USER			Amount			AccType			Date
