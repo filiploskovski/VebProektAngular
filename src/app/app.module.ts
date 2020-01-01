@@ -12,6 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AccountComponent } from './components/account/account.component';
 
+import { DataTablesModule } from 'angular-datatables';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +28,9 @@ import { AccountComponent } from './components/account/account.component';
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    DataTablesModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
