@@ -33,6 +33,20 @@ BAZA:
 	2			            DebitCard
 	3			            CreditCard
   
+  Income_Type:
+	ID    FK_USER			Name
+	1			            Cash
+	2			            DebitCard
+	3			            CreditCard
+  
+  
+  Income:
+	ID    FK_Acc			Name          Amount      Date     IsMonthly
+	1			            Plata
+	2			            Ednokratno Dopuna
+	3			            Kazino
+	3			            Kirija                                YES
+  
   
   
   Vo ova e dobro da se implementira i zaseben dms sistem na koj so userot ke moze da si zakacuva smetki fakturi ili so bilo
