@@ -7,6 +7,7 @@ import { AccountTypeComponent } from './components/account-type/account-type.com
 import { ExpenseTypeComponent } from './components/expense-type/expense-type.component';
 import { IncomeTypeComponent } from './components/income-type/income-type.component';
 import { IncomeComponent } from './components/income/income.component';
+import { ExpenseComponent } from './components/expense/expense.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'expense-type', component: ExpenseTypeComponent},
   {path: 'income-type', component: IncomeTypeComponent},
   {path: 'income', component: IncomeComponent},
+  {path: 'expense', component: ExpenseComponent},
 ];
 
 @NgModule({

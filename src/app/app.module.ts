@@ -18,6 +18,7 @@ import { AccountTypeComponent } from './components/account-type/account-type.com
 import { ExpenseTypeComponent } from './components/expense-type/expense-type.component';
 import { IncomeTypeComponent } from './components/income-type/income-type.component';
 import { IncomeComponent } from './components/income/income.component';
+import { ExpenseComponent } from './components/expense/expense.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { IncomeComponent } from './components/income/income.component';
     AccountTypeComponent,
     ExpenseTypeComponent,
     IncomeTypeComponent,
-    IncomeComponent
+    IncomeComponent,
+    ExpenseComponent
   ],
   imports: [
     BrowserModule,
