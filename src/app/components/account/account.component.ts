@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -18,7 +19,7 @@ export class AccountComponent implements OnInit {
     amount: new FormControl('', [Validators.required]),
   });
 
-  constructor(private http: HttpClient,private api: ApiService) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -26,9 +27,8 @@ export class AccountComponent implements OnInit {
     };
   }
 
-  save(): void {
-      console.log(this.accountForm);
-      this.api.SaveAccount(this.accountForm.value);
+  accountDetails(): void {
+      this.router.navigate(['/account-details']);
   }
 
 }

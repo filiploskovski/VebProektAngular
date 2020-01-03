@@ -8,6 +8,7 @@ import { ExpenseTypeComponent } from './components/expense-type/expense-type.com
 import { IncomeTypeComponent } from './components/income-type/income-type.component';
 import { IncomeComponent } from './components/income/income.component';
 import { ExpenseComponent } from './components/expense/expense.component';
+import { AccountDetailsComponent } from './components/account-details/account-details.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
   {path: 'account', component: AccountComponent},
+  {path: 'account-details', component: AccountDetailsComponent},
   {path: 'account-type', component: AccountTypeComponent},
   {path: 'expense-type', component: ExpenseTypeComponent},
   {path: 'income-type', component: IncomeTypeComponent},
