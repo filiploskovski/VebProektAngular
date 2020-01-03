@@ -25,7 +25,7 @@ BAZA:
 	3			            Leisure
 
 	Account:
-	ID			FK_USER	 FK_AccType		Amount		Date
+	ID			FK_USER	 FK_AccType		Amount		Date isDefault
 
 	Account_Type:
 	ID    FK_USER			Name
