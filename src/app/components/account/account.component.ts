@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-account',
@@ -17,7 +18,7 @@ export class AccountComponent implements OnInit {
     amount: new FormControl('', [Validators.required]),
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private api: ApiService) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -27,6 +28,7 @@ export class AccountComponent implements OnInit {
 
   save(): void {
       console.log(this.accountForm);
+      this.api.SaveAccount(this.accountForm.value);
   }
 
 }
