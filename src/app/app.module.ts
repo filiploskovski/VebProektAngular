@@ -35,12 +35,12 @@ import { ExpenseComponent } from './components/expense/expense.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     DataTablesModule,
-    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
