@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col">
       <div class="alert alert-primary" role="alert">
-        Account: <b>20000</b>
+        Monthy account: <b>20000</b>
       </div>
     </div>
   
@@ -14,23 +14,37 @@
 
   <div class="row">
     <div class="col">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Daily Expenses</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Add</a>
-        </div>
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Expenses</h4>
+        <p>Total spend today: 3000</p>
+        <hr>
+        <p>Latest daily expenses:</p>
+        <ul>
+          <li>Jajca 300</li>
+          <li>Mleko 100</li>
+        </ul>
+        <hr>
+        <p class="mb-0">
+          <button type="button" class="btn btn-danger">Add Expense</button>
+        </p>
       </div>
     </div>
     
 
     <div class="col">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Income</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Add</a>
-        </div>
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Income</h4>
+        <p>Total monthly income: 50000</p>
+        <hr>
+        <p>Latest income:</p>
+        <ul>
+          <li>Plata 30</li>
+          <li>Lihva 30000</li>
+        </ul>
+        <hr>
+        <p class="mb-0">
+          <button type="button" class="btn btn-success" routerLink = '/income'>Add Income</button>
+        </p>
       </div>
     </div>
   </div>

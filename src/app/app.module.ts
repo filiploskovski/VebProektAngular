@@ -16,6 +16,8 @@ import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountTypeComponent } from './components/account-type/account-type.component';
 import { ExpenseTypeComponent } from './components/expense-type/expense-type.component';
+import { IncomeTypeComponent } from './components/income-type/income-type.component';
+import { IncomeComponent } from './components/income/income.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ExpenseTypeComponent } from './components/expense-type/expense-type.com
     HomeComponent,
     AccountComponent,
     AccountTypeComponent,
-    ExpenseTypeComponent
+    ExpenseTypeComponent,
+    IncomeTypeComponent,
+    IncomeComponent
   ],
   imports: [
     BrowserModule,

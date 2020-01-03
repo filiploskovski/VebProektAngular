@@ -5,6 +5,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AccountComponent } from './components/account/account.component';
 import { AccountTypeComponent } from './components/account-type/account-type.component';
 import { ExpenseTypeComponent } from './components/expense-type/expense-type.component';
+import { IncomeTypeComponent } from './components/income-type/income-type.component';
+import { IncomeComponent } from './components/income/income.component';
 
 
 const routes: Routes = [
@@ -13,7 +15,9 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'account', component: AccountComponent},
   {path: 'account-type', component: AccountTypeComponent},
-  {path: 'expense-type', component: ExpenseTypeComponent}
+  {path: 'expense-type', component: ExpenseTypeComponent},
+  {path: 'income-type', component: IncomeTypeComponent},
+  {path: 'income', component: IncomeComponent},
 ];
 
 @NgModule({
