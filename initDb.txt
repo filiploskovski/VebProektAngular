@@ -25,13 +25,27 @@ BAZA:
 	3			            Leisure
 
 	Account:
-	ID			FK_USER	 FK_AccType		Amount		Date
+	ID			FK_USER	 FK_AccType		Amount		Date isDefault
 
 	Account_Type:
 	ID    FK_USER			Name
 	1			            Cash
 	2			            DebitCard
 	3			            CreditCard
+  
+  Income_Type:
+	ID    FK_USER			Name
+	1			            Cash
+	2			            DebitCard
+	3			            CreditCard
+  
+  
+  Income:
+	ID    FK_Acc			Name          Amount      Date     IsMonthly
+	1			            Plata
+	2			            Ednokratno Dopuna
+	3			            Kazino
+	3			            Kirija                                YES
   
   
   
