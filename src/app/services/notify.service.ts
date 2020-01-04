@@ -17,6 +17,10 @@ export class NotifyService {
     this.toastr.success(value, key, this.toastSettings);
   }
 
+  showDefaultSuccess() {
+    this.toastr.success("Sucess", "", this.toastSettings);
+  }
+
   showAlert(key: string, value: string) {
     this.toastr.warning(value, key, this.toastSettings);
   }
