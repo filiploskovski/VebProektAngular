@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './expense-type.component.html',
   styleUrls: ['./expense-type.component.scss']
 })
-export class ExpenseTypeComponent implements OnInit {
+export class ExpenseTypeComponent implements OnInit   {
 
   dtOptions: DataTables.Settings = {};
 
