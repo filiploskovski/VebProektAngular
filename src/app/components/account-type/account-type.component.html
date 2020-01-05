@@ -44,13 +44,14 @@
                   <tr *ngFor="let accType of accountTypeList">
                     <td>{{accType.Name}}</td>
                     <td>
-                        
+                      <div class="gTableButtons">
                       <button type="button" 
                       class="btn btn-info btn-sm gBtnTableInfo" (click) = "edit(accType.Id)">Edit</button> 
                       <button type="button" 
                       data-toggle="modal" 
                       data-target="#deleteModal" 
                       class="btn btn-danger btn-sm gBtnTableDelete" (click) = "preDelete(accType.Id)">Delete</button>
+                      </div>
                   </td>
                   </tr>
                 </tbody>
