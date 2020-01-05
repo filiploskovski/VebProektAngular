@@ -5,6 +5,7 @@ import { ApiService } from "src/app/services/api.service";
 import { Subject } from 'rxjs';
 import { NotifyService } from 'src/app/services/notify.service';
 import { IGenericComponent } from 'src/app/Interface/IGenericComponent';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: "app-account-type",
@@ -14,6 +15,8 @@ import { IGenericComponent } from 'src/app/Interface/IGenericComponent';
 export class AccountTypeComponent implements OnInit, OnDestroy, IGenericComponent<AccountTypeModel> {
  
   // DataTable
+  @ViewChild(DataTableDirective,{static: false})
+  dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   
@@ -36,9 +39,12 @@ export class AccountTypeComponent implements OnInit, OnDestroy, IGenericComponen
       pagingType: 'full_numbers',
       pageLength: 10,
     };
-
     this.pageLoad();
   }
+
+  ngAfterViewInit(): void {
+  }
+
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
@@ -79,7 +85,7 @@ export class AccountTypeComponent implements OnInit, OnDestroy, IGenericComponen
       next: (model: AccountTypeModel[]) => {
         this.accountTypeList = model;
         this.dtTrigger.next();
-      }
+        }
     });
   }
 
