@@ -2,25 +2,61 @@
 
 <div class="container">
 
-  <table datatable [dtOptions]="dtOptions" class="row-border hover table">
-    <thead>
-      <tr>
-        <th>Account Type</th>
-        <th>Name</th>
-        <th>Amount</th>
-        <th>Logic</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Depozit</td>
-        <td>Depozit Komercijalna</td>
-        <td>2500</td>
-        <td>
-          <button type="button" class="btn btn-info btn-sm gBtnTableInfo"(click) = "accountDetails()">Edit</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="col gNewButtonCss">
+      <button type="button" class="btn btn-success btn-sm gBtnTableInfo" (click)="accountDetails()">Add New</button>
+    </div>
+  </div>
 
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table">
+      <thead>
+        <tr>
+          <th>Account Type</th>
+          <th>Name</th>
+          <th>Amount</th>
+          <th>IsDefault</th>
+          <th>Logic</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let account of accountList">
+          <td>{{account.AccountTypeValue}}</td>
+          <td>{{account.Name}}</td>
+          <td>{{account.Amount}}</td>
+          <td>{{account.IsDefault}}</td>
+          <td>
+            <div class="gTableButtons">
+              <button type="button" class="btn btn-info btn-sm gBtnTableInfo" 
+              (click)="accountDetails(account.Id)">Edit</button>
+              <button type="button" 
+              data-toggle="modal" 
+              data-target="#deleteModal" 
+              class="btn btn-danger btn-sm gBtnTableDelete" (click) = "preDelete(account.Id)">Delete</button>
+              </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal Delete -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         Are you sure you want to delete 
+         <b>{{accountModel.AccountTypeValue}} </b> - <b>{{accountModel.Name}}</b> ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close" (click) = "delete(accountModel.Id)">Delete</button>
+        </div>
+      </div>
+    </div>
+<!-- End -->
 </div>

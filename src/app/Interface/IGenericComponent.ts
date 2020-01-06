@@ -4,9 +4,6 @@ export interface IGenericComponent<T> {
   dtOptions: DataTables.Settings;
   dtTrigger: Subject<any>;
 
-  accountTypeList: T[];
-  accountTypeModel: T;
-
   GetById(id: number): void;
   Get(): void;
   save(): void;
