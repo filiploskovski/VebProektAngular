@@ -18,42 +18,51 @@
       <form [formGroup]="incomeForm" (ngSubmit)="save()">
 
         <div class="form-group row">
-          <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Account</label>
+          <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Is Monthly</label>
           <div class="col-sm-6">
-            <select class="form-control form-control-sm" formControlName="account">
-              <option value="1">Small select</option>
+            <select class="form-control form-control-sm" formControlName="IsMonthly">
+              <option [ngValue]="true">Yes</option>
+              <option [ngValue]="false" >No</option>
             </select>
           </div>
         </div>
 
         <div class="form-group row">
-          <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">IsMonthly</label>
+          <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Account</label>
           <div class="col-sm-6">
-            <select class="form-control form-control-sm" formControlName="isMonthly">
-              <option value="1">Yes</option>
-              <option value="2">No</option>
+            <select class="form-control form-control-sm" formControlName="AccountId">
+              <option *ngFor="let account of accountList" [ngValue]="account.Id">{{account.Name}}</option>
             </select>
           </div>
         </div>
 
+        <div class="form-group row">
+          <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">IncomeType</label>
+          <div class="col-sm-6">
+            <select class="form-control form-control-sm" formControlName="IncomeTypeId">
+              <option *ngFor="let incomeType of incomeTypeList" [ngValue]="incomeType.Id">{{incomeType.Name}}</option>
+            </select>
+          </div>
+        </div>
+        
         <div class="form-group row">
           <label for="nameLabel" class="col-sm-2 col-form-label">Name</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control form-control-sm" id="nameLabel" formControlName="name">
+            <input type="text" class="form-control form-control-sm" id="nameLabel" formControlName="Name">
           </div>
         </div>
 
         <div class="form-group row">
           <label for="nameLabel" class="col-sm-2 col-form-label">Amount</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control form-control-sm" id="amountLabel" formControlName="amount">
+            <input type="number" class="form-control form-control-sm" id="amountLabel" formControlName="Amount">
           </div>
         </div>
 
         <div class="form-group row">
           <label for="nameLabel" class="col-sm-2 col-form-label">Date</label>
           <div class="col-sm-6">
-            <input type="date" class="form-control form-control-sm" id="datepicker" formControlName="date">
+            <input type="date"  [value]="Date | date:'yyyy-MM-dd'"  class="form-control form-control-sm" id="datepicker" formControlName="Date">
           </div>
         </div>
 
@@ -66,26 +75,36 @@
     <!-- Tab 2 Data Table -->
     <div class="tab-pane fade" id="income" role="tabpanel" aria-labelledby="income-tab">
 
-      <table datatable [dtOptions]="dtOptions" class="row-border hover table">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table">
         <thead>
           <tr>
+            <th>IncomeType</th>
+            <th>Account</th>
             <th>Name</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Is Monthly</th>
             <th>Logic</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Depozit</td>
+          <tr *ngFor="let income of incomeList">
+            <td>{{income.IncomeTypeValue}}</td>
+            <td>{{income.AccountValue}}</td>
+            <td>{{income.Name}}</td>
+            <td>{{income.Amount}}</td>
+            <td>{{income.Date | date}}</td>
+            <td>{{income.IsMonthly}}</td>
             <td>
               <div class="gTableButtons">
-                <button type="button" 
-                class="btn btn-info btn-sm gBtnTableInfo" (click) = "edit(accType.Id)">Edit</button> 
-                <button type="button" 
-                data-toggle="modal" 
-                data-target="#deleteModal" 
-                class="btn btn-danger btn-sm gBtnTableDelete" (click) = "preDelete(accType.Id)">Delete</button>
-                </div>
-            </td>
+              <button type="button" 
+              class="btn btn-info btn-sm gBtnTableInfo" (click) = "edit(income.Id)">Edit</button> 
+              <button type="button" 
+              data-toggle="modal" 
+              data-target="#deleteModal" 
+              class="btn btn-danger btn-sm gBtnTableDelete" (click) = "preDelete(income.Id)">Delete</button>
+              </div>
+          </td>
           </tr>
         </tbody>
       </table>
@@ -105,10 +124,10 @@
             </button>
           </div>
           <div class="modal-body">
-            Are you sure you want to delete this record ?
+           Are you sure you want to delete <b>{{deleteModel.Name}}</b> ?
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close" (click) = "delete(deleteModel.Id)">Delete</button>
           </div>
         </div>
       </div>
