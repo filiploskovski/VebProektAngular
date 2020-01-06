@@ -2,10 +2,10 @@
 
 <div class="container">
 
-  <div class="row">
+  <div class="row" *ngFor ="let account of accountList">
     <div class="col">
-      <a (dblclick) = "accountDetails()"><div class="alert alert-primary" role="alert">
-        Monthy account: <b>20000</b>
+      <a (dblclick) = "accountDetails(account.Id)"><div class="alert alert-primary" role="alert">
+      {{account.Name}}: <b>{{account.Amount}}</b>
       </div></a>
     </div>
   
