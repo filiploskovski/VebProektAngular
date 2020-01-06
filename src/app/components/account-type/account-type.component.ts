@@ -15,7 +15,6 @@ import { DataTableDirective } from 'angular-datatables';
 export class AccountTypeComponent implements OnInit, OnDestroy, IGenericComponent<AccountTypeModel> {
  
   // DataTable
-  @ViewChild(DataTableDirective,{static: false})
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();

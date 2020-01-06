@@ -4,7 +4,7 @@ export class ExpenseTypeModel implements EntityModel {
   Id: number;
   Name: string;
 
-  constructor(theId?: number) {
-    this.Id = theId;
+  constructor(id?: number) {
+    this.Id = id;
   }
 }

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AccountTypeModel } from '../models/AccountTypeModel';
 import { AccountModel } from '../models/AccountModel';
+import { IncomeTypeModel } from '../models/IncomeTypeModel';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,13 @@ export class ApiService {
   private accountDelete = `${this.apiUrl}/account`;
   private accountFillForm = `${this.apiUrl}/account/get-by-id`;
   private accountGet = `${this.apiUrl}/account/get`;
+
+  // Income Type 
+
+  private incomeTypeSave = `${this.apiUrl}/income-type`;
+  private incomeTypeDelete = `${this.apiUrl}/income-type`;
+  private incomeTypeFillForm = `${this.apiUrl}/income-type/get-by-id`;
+  private incomeTypeGet = `${this.apiUrl}/income-type/get`;
 
   constructor(private http: HttpClient) { }
 
@@ -62,6 +70,23 @@ export class ApiService {
         return this.http.post(this.accountSave, obj).pipe();
       default:
         return this.http.put(this.accountSave, obj).pipe();
+    }
+  }
+
+  IncomeTypeGet(): Observable<{}> {
+    return this.http.get(this.incomeTypeGet).pipe();
+  }
+
+  IncomeTypeGetById(obj: IncomeTypeModel): Observable<{}> {
+    return this.http.post(this.incomeTypeFillForm, obj, {headers: this.httpBuildOptions()}).pipe();
+  }
+
+  IncomeTypeSave(obj: IncomeTypeModel): Observable<{}> {
+    switch (obj.Id) {
+      case 0:
+        return this.http.post(this.incomeTypeSave, obj).pipe();
+      default:
+        return this.http.put(this.incomeTypeSave, obj).pipe();
     }
   }
  
