@@ -6,6 +6,7 @@ import { AccountTypeModel } from '../models/AccountTypeModel';
 import { AccountModel } from '../models/AccountModel';
 import { IncomeTypeModel } from '../models/IncomeTypeModel';
 import { IncomeModel } from '../models/IncomeModel';
+import { ExpenseTypeModel } from '../models/ExpenseTypeModel';
 
 @Injectable({
   providedIn: 'root'
@@ -31,11 +32,17 @@ export class ApiService {
   private incomeTypeFillForm = `${this.apiUrl}/income-type/get-by-id`;
   private incomeTypeGet = `${this.apiUrl}/income-type/get`;
 
-   // Income
-   private incomeSave = `${this.apiUrl}/income`;
-   private incomeDelete = `${this.apiUrl}/income`;
-   private incomeFillForm = `${this.apiUrl}/income/get-by-id`;
-   private incomeGet = `${this.apiUrl}/income/get`;
+  // Income
+  private incomeSave = `${this.apiUrl}/income`;
+  private incomeDelete = `${this.apiUrl}/income`;
+  private incomeFillForm = `${this.apiUrl}/income/get-by-id`;
+  private incomeGet = `${this.apiUrl}/income/get`;
+
+  // Expense Type
+  private expenseTypeSave = `${this.apiUrl}/expense-type`;
+  private expenseTypeDelete = `${this.apiUrl}/expense-type`;
+  private expenseTypeFillForm = `${this.apiUrl}/expense-type/get-by-id`;
+  private expenseTypeGet = `${this.apiUrl}/expense-type/get`;
 
   constructor(private http: HttpClient) { }
 
@@ -110,6 +117,23 @@ export class ApiService {
         return this.http.post(this.incomeSave, obj).pipe();
       default:
         return this.http.put(this.incomeSave, obj).pipe();
+    }
+  }
+
+  ExpenseTypeGet(): Observable<{}> {
+    return this.http.get(this.expenseTypeGet).pipe();
+  }
+
+  ExpenseTypeGetById(obj: ExpenseTypeModel): Observable<{}> {
+    return this.http.post(this.expenseTypeFillForm, obj, {headers: this.httpBuildOptions()}).pipe();
+  }
+
+  ExpenseTypeSave(obj: ExpenseTypeModel): Observable<{}> {
+    switch (obj.Id) {
+      case 0:
+        return this.http.post(this.expenseTypeSave, obj).pipe();
+      default:
+        return this.http.put(this.expenseTypeSave, obj).pipe();
     }
   }
  
