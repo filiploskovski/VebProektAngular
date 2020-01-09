@@ -9,11 +9,13 @@ import { IncomeTypeComponent } from './components/income-type/income-type.compon
 import { IncomeComponent } from './components/income/income.component';
 import { ExpenseComponent } from './components/expense/expense.component';
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 const routes: Routes = [
   {path: '', pathMatch: 'full' , redirectTo: '/login'},
   {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
   {path: 'account', component: AccountComponent},
   {path: 'account-details', component: AccountDetailsComponent},

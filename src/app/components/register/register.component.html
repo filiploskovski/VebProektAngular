@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4 loginForm">
+          <h2 class="display-8 py-2">Cash M</h2>
+          <hr />
+          <h4 class="py-2">Register</h4>
+            <div class="px-2">
+                <form action="" class="justify-content-center" [formGroup] = "registerForm" (ngSubmit) = "register()">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" class="form-control" formControlName = "FirstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" class="form-control" formControlName = "LastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" formControlName = "Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" formControlName = "Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" class="form-control" formControlName = "ConfirmPassword">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <hr />
+                    <button type="button" class="btn btn-link" routerLink = "/register">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
