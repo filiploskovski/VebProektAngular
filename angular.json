@@ -28,6 +28,9 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/devextreme/dist/css/dx.common.css",
+              "node_modules/devextreme/dist/css/dx.light.css",
+              
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css",
               "src/styles.scss",
