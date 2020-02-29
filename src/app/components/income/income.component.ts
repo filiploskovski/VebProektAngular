@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AccountModel } from "src/app/models/AccountModel";
 import { ApiService } from "src/app/services/api.service";
@@ -9,6 +9,7 @@ import { IGenericComponent } from "src/app/Interface/IGenericComponent";
 import { DeleteModel } from "src/app/models/DeleteModel";
 import { Subject } from "rxjs";
 import { DatePipe } from '@angular/common';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: "app-income",
@@ -17,9 +18,11 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class IncomeComponent
-  implements OnInit, OnDestroy, IGenericComponent<IncomeModel> {
+  implements OnInit,AfterViewInit ,OnDestroy, IGenericComponent<IncomeModel> {
   
   // DataTable
+  @ViewChild(DataTableDirective, {static: true})
+  dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
@@ -46,10 +49,11 @@ export class IncomeComponent
   constructor(private api: ApiService, private notify: NotifyService, private datePipe: DatePipe) {}
 
   ngOnInit() {
-    this.dtOptions = {
-      pagingType: "full_numbers"
-    };
     this.pageLoad();
+  }
+
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
   }
 
   ngOnDestroy(): void {
@@ -82,7 +86,7 @@ export class IncomeComponent
     this.api.IncomeGet().subscribe({
       next: (model: IncomeModel[]) => {
         this.incomeList = model;
-        this.dtTrigger.next();
+        this.rerender();
       }
     });
   }
@@ -124,6 +128,13 @@ export class IncomeComponent
 
   delete(id: number) {
     console.log(id);
+  }
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.dtTrigger.next();
+    });
   }
 
   

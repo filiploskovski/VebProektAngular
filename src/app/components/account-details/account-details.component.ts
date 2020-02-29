@@ -6,16 +6,22 @@ import { AccountModel } from 'src/app/models/AccountModel';
 import { NotifyService } from 'src/app/services/notify.service';
 import { DataTransferService } from 'src/app/services/data-transfer.service';
 import { IGenericComponent } from 'src/app/Interface/IGenericComponent';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-account-details',
   templateUrl: './account-details.component.html',
   styleUrls: ['./account-details.component.scss']
 })
-export class AccountDetailsComponent implements OnInit {
+export class AccountDetailsComponent implements OnInit,AfterViewInit {
+
   
-  dtTrigger: import("rxjs").Subject<any>;
-  dtOptions: DataTables.Settings = {};
+   // DataTable
+   @ViewChild(DataTableDirective, {static: true})
+   dtElement: DataTableDirective;
+   dtOptions: DataTables.Settings = {};
+   dtTrigger: Subject<any> = new Subject();
   
   accountTypeList: AccountTypeModel[];
   accountModel: AccountModel;
@@ -31,11 +37,12 @@ export class AccountDetailsComponent implements OnInit {
   constructor(private api: ApiService,private notify: NotifyService,private dataTransfer: DataTransferService) { }
 
   ngOnInit() {
-    this.dtOptions = {
-      pagingType: 'full_numbers'
-    };
     this.getAccountType();
     this.pageLoad(this.dataTransfer.readMessage());
+  }
+
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
   }
 
   save(): void {
@@ -74,6 +81,13 @@ export class AccountDetailsComponent implements OnInit {
           });
         }
       });
+  }
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.dtTrigger.next();
+    });
   }
 
 }

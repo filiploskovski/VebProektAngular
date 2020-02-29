@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IGenericComponent } from 'src/app/Interface/IGenericComponent';
 import { ExpenseTypeModel } from 'src/app/models/ExpenseTypeModel';
@@ -13,9 +13,11 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './expense-type.component.html',
   styleUrls: ['./expense-type.component.scss']
 })
-export class ExpenseTypeComponent implements OnInit,OnDestroy,IGenericComponent<ExpenseTypeModel>   {
+export class ExpenseTypeComponent implements OnInit,AfterViewInit,IGenericComponent<ExpenseTypeModel>   {
+  
   
   // DataTable
+  @ViewChild(DataTableDirective, {static: true})
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -35,11 +37,11 @@ export class ExpenseTypeComponent implements OnInit,OnDestroy,IGenericComponent<
   constructor(private api: ApiService, private notify: NotifyService) {}
 
   ngOnInit() {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-    };
     this.pageLoad();
+  }
+
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
   }
 
   ngOnDestroy(): void {
@@ -80,7 +82,7 @@ export class ExpenseTypeComponent implements OnInit,OnDestroy,IGenericComponent<
     this.api.ExpenseTypeGet().subscribe({
       next: (model: ExpenseTypeModel[]) => {
         this.expenseTypeList = model;
-        this.dtTrigger.next();
+        this.rerender();
       }
     });
   }
@@ -94,6 +96,13 @@ export class ExpenseTypeComponent implements OnInit,OnDestroy,IGenericComponent<
           Name: model.Name
         });
       }
+    });
+  }
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.dtTrigger.next();
     });
   }
 

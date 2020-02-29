@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { IncomeTypeModel } from "src/app/models/IncomeTypeModel";
 import { Subject } from "rxjs";
@@ -13,8 +13,10 @@ import { IGenericComponent } from "src/app/Interface/IGenericComponent";
   styleUrls: ["./income-type.component.scss"]
 })
 export class IncomeTypeComponent
-  implements OnInit,OnDestroy, IGenericComponent<IncomeTypeModel> {
-  // DataTable
+  implements OnInit,AfterViewInit, IGenericComponent<IncomeTypeModel> {
+  
+    // DataTable
+  @ViewChild(DataTableDirective, {static: true})
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -34,22 +36,16 @@ export class IncomeTypeComponent
   constructor(private api: ApiService, private notify: NotifyService) {}
 
   ngOnInit() {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-    };
     this.pageLoad();
   }
 
-  ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
   }
 
   edit(id: number): void {
     this.pageLoad(id);
   }
-  
-
 
   save(): void {
     this.api
@@ -81,7 +77,7 @@ export class IncomeTypeComponent
     this.api.IncomeTypeGet().subscribe({
       next: (model: IncomeTypeModel[]) => {
         this.incomeTypeList = model;
-        this.dtTrigger.next();
+        this.rerender();
       }
     });
   }
@@ -95,6 +91,15 @@ export class IncomeTypeComponent
           Name: model.Name
         });
       }
+    });
+  }
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      // Call the dtTrigger to rerender again
+      this.dtTrigger.next();
     });
   }
 }
