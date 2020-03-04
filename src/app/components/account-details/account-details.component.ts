@@ -15,7 +15,6 @@ import { Subject } from 'rxjs';
   styleUrls: ['./account-details.component.scss']
 })
 export class AccountDetailsComponent implements OnInit,AfterViewInit {
-
   
    // DataTable
    @ViewChild(DataTableDirective, {static: true})
@@ -37,8 +36,8 @@ export class AccountDetailsComponent implements OnInit,AfterViewInit {
   constructor(private api: ApiService,private notify: NotifyService,private dataTransfer: DataTransferService) { }
 
   ngOnInit() {
-    this.getAccountType();
     this.pageLoad(this.dataTransfer.readMessage());
+    this.getAccountType();
   }
 
   ngAfterViewInit(): void {
@@ -60,18 +59,14 @@ export class AccountDetailsComponent implements OnInit,AfterViewInit {
   }
 
   pageLoad(id?: number): void {
-    this.Get();
     if(id != null) { this.GetById(id) }
-  }
-
-  Get(): void {
-    // return income and expense by account
   }
 
   GetById(id: number): void {
     const entity = new AccountModel(id);
       this.api.AccountGetById(entity).subscribe({
         next: (model: AccountModel) => {
+          this.accountModel = model;
           this.accountForm.patchValue({
             Id: model.Id,
             Name: model.Name,
@@ -79,6 +74,7 @@ export class AccountDetailsComponent implements OnInit,AfterViewInit {
             Amount: model.Amount,
             IsDefault: model.IsDefault
           });
+          this.rerender();
         }
       });
   }

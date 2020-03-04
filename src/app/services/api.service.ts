@@ -14,6 +14,10 @@ import { ExpenseTypeModel } from '../models/ExpenseTypeModel';
 export class ApiService {
   private apiUrl = environment.apiUrl;
 
+   // Dashboard
+   private dashboard = `${this.apiUrl}/home/dashboard`;
+
+
   // Account Type
   private accountTypeSave = `${this.apiUrl}/account-type`;
   private accountTypeDelete = `${this.apiUrl}/account-type`;
@@ -37,6 +41,7 @@ export class ApiService {
   private incomeDelete = `${this.apiUrl}/income`;
   private incomeFillForm = `${this.apiUrl}/income/get-by-id`;
   private incomeGet = `${this.apiUrl}/income/get`;
+  private incomeGetTopThreeByDate = `${this.apiUrl}/income/get-top-three`;
 
   // Expense Type
   private expenseTypeSave = `${this.apiUrl}/expense-type`;
@@ -50,6 +55,10 @@ export class ApiService {
     const headerOptions = new HttpHeaders();
     headerOptions.set('Content-Type', 'application/json');
     return headerOptions;
+  }
+
+  Dashboard(): Observable<{}> {
+    return this.http.get(this.dashboard).pipe();
   }
 
   AccountTypeGet(): Observable<{}> {

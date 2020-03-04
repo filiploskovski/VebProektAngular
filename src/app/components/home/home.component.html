@@ -2,13 +2,12 @@
 
 <div class="container">
 
-  <div class="row" *ngFor ="let account of accountList">
+  <div class="row" *ngFor ="let account of dashboard?.Accounts">
     <div class="col">
       <a (dblclick) = "accountDetails(account.Id)"><div class="alert alert-primary" role="alert">
       {{account.Name}}: <b>{{account.Amount}}</b>
       </div></a>
     </div>
-  
 </div>
  
 
@@ -16,12 +15,11 @@
     <div class="col">
       <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">Expenses</h4>
-        <p>Total spend today: 3000</p>
+        <p>Total spend today: {{dashboard?.DailyExpenses}}</p>
         <hr>
         <p>Latest daily expenses:</p>
-        <ul>
-          <li>Jajca 300</li>
-          <li>Mleko 100</li>
+        <ul *ngFor = "let asd of dashboard?.Expense">
+          <li>{{asd.IncomeTypeValue}}: {{asd.Amount}}</li>
         </ul>
         <hr>
         <p class="mb-0">
@@ -33,13 +31,12 @@
 
     <div class="col">
       <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Income</h4>
-        <p>Total monthly income: 50000</p>
+        <h4 class="alert-heading">Incomes</h4>
+        <p>Total monthly income: {{dashboard?.MonthlyIncome}}</p>
         <hr>
         <p>Latest income:</p>
-        <ul>
-          <li>Plata 30</li>
-          <li>Lihva 30000</li>
+        <ul *ngFor = "let asd of dashboard?.Income">
+          <li>{{asd.IncomeTypeValue}}: {{asd.Amount}}</li>
         </ul>
         <hr>
         <p class="mb-0">

@@ -4,6 +4,7 @@ import { AccountModel } from 'src/app/models/AccountModel';
 import { ApiService } from 'src/app/services/api.service';
 import { AccountTypeModel } from 'src/app/models/AccountTypeModel';
 import { DataTransferService } from 'src/app/services/data-transfer.service';
+import { IncomeModel } from 'src/app/models/IncomeModel';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +12,13 @@ import { DataTransferService } from 'src/app/services/data-transfer.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-
-  public accountList: AccountModel[];
+  
+  dashboard: any;
 
   constructor(private router: Router,private api: ApiService,private dataTransfer: DataTransferService) { }
 
   ngOnInit() {
-    this.getAccount();
+    this.get();
   }
 
   accountDetails(id: number){
@@ -26,9 +26,12 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/account-details']);
   }
 
-  getAccount(): void {
-    this.api.AccountGet().subscribe({
-        next: (model: AccountModel[]) => this.accountList = model
+  get(): void {
+    this.api.Dashboard().subscribe({
+      next: (model: any) => {
+        this.dashboard = model;
+         console.log(this.dashboard)
+      }
     });
   }
 

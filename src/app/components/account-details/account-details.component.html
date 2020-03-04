@@ -65,20 +65,22 @@
           <tr>
             <th>Type</th>
             <th>Name</th>
+            <th>Date</th>
             <th>Amount</th>
             <th>Logic</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Depozit</td>
-            <td>Depozit Komercijalna</td>
-            <td>2500</td>
+          <tr *ngFor="let income of accountModel?.Income">
+            <td>Income</td>
+            <td>{{income.Name}}</td>
+            <td>{{income.Date}}</td>
+            <td>{{income.Amount}}</td>
             <td>
               <div class="gTableButtons">
-                <button type="button" class="btn btn-info btn-sm gBtnTableInfo" (click)="edit(accType.Id)">Edit</button>
+                <button type="button" class="btn btn-info btn-sm gBtnTableInfo" (click)="edit(income.Id)">Edit</button>
                 <button type="button" data-toggle="modal" data-target="#deleteModal"
-                  class="btn btn-danger btn-sm gBtnTableDelete" (click)="preDelete(accType.Id)">Delete</button>
+                  class="btn btn-danger btn-sm gBtnTableDelete" (click)="preDelete(income.Id)">Delete</button>
               </div>
             </td>
           </tr>

@@ -17,7 +17,7 @@ export class AccountComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   public accountList: AccountModel[];
-  public accountModel: AccountModel = { Id: 0 ,Name:"", Amount: 0, AccountTypeId: 0, IsDefault: false };
+  public accountModel: AccountModel = { Id: 0 ,Name:"", Amount: 0, AccountTypeId: 0, IsDefault: false,Expence: null,Income:null };
 
   constructor(private router: Router,private api: ApiService,private dataTransfer: DataTransferService) { }
 
