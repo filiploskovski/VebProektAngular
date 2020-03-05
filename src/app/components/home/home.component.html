@@ -5,7 +5,7 @@
   <div class="row" *ngFor ="let account of dashboard?.Accounts">
     <div class="col">
       <a (dblclick) = "accountDetails(account.Id)"><div class="alert alert-primary" role="alert">
-      {{account.Name}}: <b>{{account.Amount}}</b>
+      {{account.Name}}: <b>{{account.Amount | number:'.2'}}</b>
       </div></a>
     </div>
 </div>
@@ -15,11 +15,11 @@
     <div class="col">
       <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">Expenses</h4>
-        <p>Total spend today: {{dashboard?.DailyExpenses}}</p>
+        <p>Total spend today: <b>{{dashboard?.DailyExpenses | number:'.2'}}</b></p>
         <hr>
         <p>Latest daily expenses:</p>
         <ul *ngFor = "let asd of dashboard?.Expense">
-          <li>{{asd.IncomeTypeValue}}: {{asd.Amount}}</li>
+          <li>{{asd.ExpenseTypeValue}}: {{asd.Amount | number:'.2'}}</li>
         </ul>
         <hr>
         <p class="mb-0">
@@ -32,27 +32,16 @@
     <div class="col">
       <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Incomes</h4>
-        <p>Total monthly income: {{dashboard?.MonthlyIncome}}</p>
+        <p>Total monthly income: <b>{{dashboard?.MonthlyIncome | number:'.2'}}</b></p>
         <hr>
         <p>Latest income:</p>
         <ul *ngFor = "let asd of dashboard?.Income">
-          <li>{{asd.IncomeTypeValue}}: {{asd.Amount}}</li>
+          <li>{{asd.IncomeTypeValue}}: {{asd.Amount | number:'.2'}}</li>
         </ul>
         <hr>
         <p class="mb-0">
           <button type="button" class="btn btn-success" routerLink = '/income'>Add Income</button>
         </p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="col">
-      <div class="alert alert-warning" role="alert">
-        <h4 class="alert-heading">Debt</h4>
-        <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-        <hr>
-        <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
       </div>
     </div>
   </div>

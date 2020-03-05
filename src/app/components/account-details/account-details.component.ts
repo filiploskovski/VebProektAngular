@@ -8,10 +8,13 @@ import { DataTransferService } from 'src/app/services/data-transfer.service';
 import { IGenericComponent } from 'src/app/Interface/IGenericComponent';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-account-details',
   templateUrl: './account-details.component.html',
+  providers: [DatePipe],
   styleUrls: ['./account-details.component.scss']
 })
 export class AccountDetailsComponent implements OnInit,AfterViewInit {
@@ -24,6 +27,7 @@ export class AccountDetailsComponent implements OnInit,AfterViewInit {
   
   accountTypeList: AccountTypeModel[];
   accountModel: AccountModel;
+  showHideFlag: boolean = true;
 
   accountForm = new FormGroup({
     Id: new FormControl(0),
@@ -33,7 +37,7 @@ export class AccountDetailsComponent implements OnInit,AfterViewInit {
     IsDefault: new FormControl('',[Validators.required])
   });
   
-  constructor(private api: ApiService,private notify: NotifyService,private dataTransfer: DataTransferService) { }
+  constructor(private api: ApiService,private notify: NotifyService, private datePipe: DatePipe, private dataTransfer: DataTransferService, private router: Router) { }
 
   ngOnInit() {
     this.pageLoad(this.dataTransfer.readMessage());
@@ -74,6 +78,7 @@ export class AccountDetailsComponent implements OnInit,AfterViewInit {
             Amount: model.Amount,
             IsDefault: model.IsDefault
           });
+          this.showHideFlag = false;
           this.rerender();
         }
       });
@@ -84,6 +89,17 @@ export class AccountDetailsComponent implements OnInit,AfterViewInit {
       dtInstance.destroy();
       this.dtTrigger.next();
     });
+  }
+
+  routeToIncome(id: Number){
+    console.log("Vo f-ja", id);
+    this.dataTransfer.setMessage(id);
+    this.router.navigate(['/income']);
+  }
+
+  routeToExpense(id: Number){
+    this.dataTransfer.setMessage(id);
+    this.router.navigate(['/expense']);
   }
 
 }

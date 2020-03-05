@@ -1,36 +1,36 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { AccountTypeModel } from '../models/AccountTypeModel';
-import { AccountModel } from '../models/AccountModel';
-import { IncomeTypeModel } from '../models/IncomeTypeModel';
-import { IncomeModel } from '../models/IncomeModel';
-import { ExpenseTypeModel } from '../models/ExpenseTypeModel';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+import { AccountTypeModel } from "../models/AccountTypeModel";
+import { AccountModel } from "../models/AccountModel";
+import { IncomeTypeModel } from "../models/IncomeTypeModel";
+import { IncomeModel } from "../models/IncomeModel";
+import { ExpenseTypeModel } from "../models/ExpenseTypeModel";
+import { ExpenseModel } from '../models/ExpenseModel';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ApiService {
   private apiUrl = environment.apiUrl;
 
-   // Dashboard
-   private dashboard = `${this.apiUrl}/home/dashboard`;
-
+  // Dashboard
+  private dashboard = `${this.apiUrl}/home/dashboard`;
 
   // Account Type
   private accountTypeSave = `${this.apiUrl}/account-type`;
   private accountTypeDelete = `${this.apiUrl}/account-type`;
   private accountTypeFillForm = `${this.apiUrl}/account-type/get-by-id`;
   private accountTypeGet = `${this.apiUrl}/account-type/get`;
-  
+
   // Account
   private accountSave = `${this.apiUrl}/account`;
   private accountDelete = `${this.apiUrl}/account`;
   private accountFillForm = `${this.apiUrl}/account/get-by-id`;
   private accountGet = `${this.apiUrl}/account/get`;
 
-  // Income Type 
+  // Income Type
   private incomeTypeSave = `${this.apiUrl}/income-type`;
   private incomeTypeDelete = `${this.apiUrl}/income-type`;
   private incomeTypeFillForm = `${this.apiUrl}/income-type/get-by-id`;
@@ -49,11 +49,17 @@ export class ApiService {
   private expenseTypeFillForm = `${this.apiUrl}/expense-type/get-by-id`;
   private expenseTypeGet = `${this.apiUrl}/expense-type/get`;
 
-  constructor(private http: HttpClient) { }
+  // Expense
+  private expenseSave = `${this.apiUrl}/expense`;
+  private expenseDelete = `${this.apiUrl}/expense`;
+  private expenseFillForm = `${this.apiUrl}/expense/get-by-id`;
+  private expenseGet = `${this.apiUrl}/expense/get`;
+
+  constructor(private http: HttpClient) {}
 
   httpBuildOptions() {
     const headerOptions = new HttpHeaders();
-    headerOptions.set('Content-Type', 'application/json');
+    headerOptions.set("Content-Type", "application/json");
     return headerOptions;
   }
 
@@ -66,7 +72,9 @@ export class ApiService {
   }
 
   AccountTypeGetById(obj: AccountTypeModel): Observable<{}> {
-    return this.http.post(this.accountTypeFillForm, obj, {headers: this.httpBuildOptions()}).pipe();
+    return this.http
+      .post(this.accountTypeFillForm, obj, { headers: this.httpBuildOptions() })
+      .pipe();
   }
 
   AccountTypeSave(obj: AccountTypeModel): Observable<{}> {
@@ -83,7 +91,9 @@ export class ApiService {
   }
 
   AccountGetById(obj: AccountModel): Observable<{}> {
-    return this.http.post(this.accountFillForm, obj, {headers: this.httpBuildOptions()}).pipe();
+    return this.http
+      .post(this.accountFillForm, obj, { headers: this.httpBuildOptions() })
+      .pipe();
   }
 
   AccountSave(obj: AccountModel): Observable<{}> {
@@ -100,7 +110,9 @@ export class ApiService {
   }
 
   IncomeTypeGetById(obj: IncomeTypeModel): Observable<{}> {
-    return this.http.post(this.incomeTypeFillForm, obj, {headers: this.httpBuildOptions()}).pipe();
+    return this.http
+      .post(this.incomeTypeFillForm, obj, { headers: this.httpBuildOptions() })
+      .pipe();
   }
 
   IncomeTypeSave(obj: IncomeTypeModel): Observable<{}> {
@@ -117,7 +129,9 @@ export class ApiService {
   }
 
   IncomeGetById(obj: IncomeModel): Observable<{}> {
-    return this.http.post(this.incomeFillForm, obj, {headers: this.httpBuildOptions()}).pipe();
+    return this.http
+      .post(this.incomeFillForm, obj, { headers: this.httpBuildOptions() })
+      .pipe();
   }
 
   IncomeSave(obj: IncomeModel): Observable<{}> {
@@ -134,7 +148,9 @@ export class ApiService {
   }
 
   ExpenseTypeGetById(obj: ExpenseTypeModel): Observable<{}> {
-    return this.http.post(this.expenseTypeFillForm, obj, {headers: this.httpBuildOptions()}).pipe();
+    return this.http
+      .post(this.expenseTypeFillForm, obj, { headers: this.httpBuildOptions() })
+      .pipe();
   }
 
   ExpenseTypeSave(obj: ExpenseTypeModel): Observable<{}> {
@@ -145,6 +161,23 @@ export class ApiService {
         return this.http.put(this.expenseTypeSave, obj).pipe();
     }
   }
- 
- 
+
+  ExpenseGet(): Observable<{}> {
+    return this.http.get(this.expenseGet).pipe();
+  }
+
+  ExpenseGetById(obj: ExpenseModel): Observable<{}> {
+    return this.http
+      .post(this.expenseFillForm, obj, { headers: this.httpBuildOptions() })
+      .pipe();
+  }
+
+  ExpenseSave(obj: ExpenseModel): Observable<{}> {
+    switch (obj.Id) {
+      case 0:
+        return this.http.post(this.expenseSave, obj).pipe();
+      default:
+        return this.http.put(this.expenseSave, obj).pipe();
+    }
+  }
 }

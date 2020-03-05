@@ -22,7 +22,7 @@
         <tr *ngFor = "let account of accountList">
           <td>{{account.AccountTypeValue}}</td>
           <td>{{account.Name}}</td>
-          <td>{{account.Amount}}</td>
+          <td>{{account.Amount | number:'.2'}}</td>
           <td>{{account.IsDefault}}</td>
           <td>
             <div class="gTableButtons">

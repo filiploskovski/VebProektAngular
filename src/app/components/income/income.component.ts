@@ -10,6 +10,7 @@ import { DeleteModel } from "src/app/models/DeleteModel";
 import { Subject } from "rxjs";
 import { DatePipe } from '@angular/common';
 import { DataTableDirective } from 'angular-datatables';
+import { DataTransferService } from 'src/app/services/data-transfer.service';
 
 @Component({
   selector: "app-income",
@@ -46,10 +47,10 @@ export class IncomeComponent
   // Delete
   deleteModel: DeleteModel = {Id: 0, Name: ""};
 
-  constructor(private api: ApiService, private notify: NotifyService, private datePipe: DatePipe) {}
+  constructor(private api: ApiService, private notify: NotifyService, private datePipe: DatePipe,private dataTransfer: DataTransferService) {}
 
   ngOnInit() {
-    this.pageLoad();
+    this.pageLoad(this.dataTransfer.readMessage());
   }
 
   ngAfterViewInit(): void {
