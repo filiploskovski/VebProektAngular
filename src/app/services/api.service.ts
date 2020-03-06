@@ -8,12 +8,21 @@ import { IncomeTypeModel } from "../models/IncomeTypeModel";
 import { IncomeModel } from "../models/IncomeModel";
 import { ExpenseTypeModel } from "../models/ExpenseTypeModel";
 import { ExpenseModel } from '../models/ExpenseModel';
+import { RegisterModel } from '../models/RegisterModel';
+import { LoginModel } from '../models/LoginModel';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: "root"
 })
 export class ApiService {
   private apiUrl = environment.apiUrl;
+
+  //User Register
+  private login = `${this.apiUrl}/user/login`;
+
+  //User Register
+  private register = `${this.apiUrl}/user/register`;
 
   // Dashboard
   private dashboard = `${this.apiUrl}/home/dashboard`;
@@ -55,13 +64,22 @@ export class ApiService {
   private expenseFillForm = `${this.apiUrl}/expense/get-by-id`;
   private expenseGet = `${this.apiUrl}/expense/get`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private auth: AuthService) {}
 
   httpBuildOptions() {
     const headerOptions = new HttpHeaders();
     headerOptions.set("Content-Type", "application/json");
+    headerOptions.set("Authorization", `Bearer ${this.auth.getToken()}`);
     return headerOptions;
   }
+
+  UserLogin(obj: LoginModel): Observable<{}> {
+    return this.http.post(this.login, obj, { headers: this.httpBuildOptions()}).pipe();
+}
+  
+  UserRegister(obj: RegisterModel): Observable<{}> {
+        return this.http.post(this.register, obj).pipe();
+    }
 
   Dashboard(): Observable<{}> {
     return this.http.get(this.dashboard).pipe();

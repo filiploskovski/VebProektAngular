@@ -14,6 +14,7 @@ export class AuthService {
   setToken(token: string): void {
     localStorage.removeItem('token');
     localStorage.setItem('token', token);
+    console.log("Token",token);
   }
 
   addItemToLocalStorage(key: string, value: string): void {
