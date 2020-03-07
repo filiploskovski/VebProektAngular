@@ -19,12 +19,10 @@ export class DataTransferService {
   readMessage(): any {
     let message = "";
     this.currentMessage.subscribe({
-      next: (m: any) => (message = m)
+      next: (m: any) => (message = m),
+      complete: () => {}
     });
-    setTimeout(() => {
-      this.messageSource.next(null);
-      console.log("DataTransfer", message);
-    }, 250);
+    
     return message;
   }
 }

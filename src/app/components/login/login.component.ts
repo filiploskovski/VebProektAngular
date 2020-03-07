@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.api.UserLogin(this.loginForm.value as LoginModel).subscribe({
-      next: (token: any) => {
-        console.log("Od Api token", token);
-        this.auth.setToken(token);
-        this.router.navigate(["home"]);
+      next: (data: any) => {
+        this.auth.setToken(data.Token);
+        localStorage.setItem("username", data.Username);
       },
+      complete: () => this.router.navigate(["home"]),
       error: (error: any) => console.log("Error", error)
     });
   }
