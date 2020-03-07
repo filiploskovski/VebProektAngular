@@ -7,10 +7,10 @@ import { AccountModel } from "../models/AccountModel";
 import { IncomeTypeModel } from "../models/IncomeTypeModel";
 import { IncomeModel } from "../models/IncomeModel";
 import { ExpenseTypeModel } from "../models/ExpenseTypeModel";
-import { ExpenseModel } from '../models/ExpenseModel';
-import { RegisterModel } from '../models/RegisterModel';
-import { LoginModel } from '../models/LoginModel';
-import { AuthService } from './auth.service';
+import { ExpenseModel } from "../models/ExpenseModel";
+import { RegisterModel } from "../models/RegisterModel";
+import { LoginModel } from "../models/LoginModel";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root"
@@ -64,138 +64,161 @@ export class ApiService {
   private expenseFillForm = `${this.apiUrl}/expense/get-by-id`;
   private expenseGet = `${this.apiUrl}/expense/get`;
 
-  constructor(private http: HttpClient,private auth: AuthService) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
-  httpBuildOptions() {
-    const headerOptions = new HttpHeaders();
-    headerOptions.set("Content-Type", "application/json");
-    headerOptions.set("Authorization", `Bearer ${this.auth.getToken()}`);
-    return headerOptions;
-  }
+  headers = new HttpHeaders()
+    .set("Content-Type", "application/json")
+    .set("Authorization", `Bearer ${this.auth.getToken()}`);
 
   UserLogin(obj: LoginModel): Observable<{}> {
-    return this.http.post(this.login, obj, { headers: this.httpBuildOptions()}).pipe();
-}
-  
+    return this.http.post(this.login, obj, { headers: this.headers }).pipe();
+  }
+
   UserRegister(obj: RegisterModel): Observable<{}> {
-        return this.http.post(this.register, obj).pipe();
-    }
+    return this.http.post(this.register, obj, { headers: this.headers }).pipe();
+  }
 
   Dashboard(): Observable<{}> {
-    return this.http.get(this.dashboard).pipe();
+    return this.http.get(this.dashboard, { headers: this.headers }).pipe();
   }
 
   AccountTypeGet(): Observable<{}> {
-    return this.http.get(this.accountTypeGet).pipe();
+    return this.http.get(this.accountTypeGet, { headers: this.headers }).pipe();
   }
 
   AccountTypeGetById(obj: AccountTypeModel): Observable<{}> {
     return this.http
-      .post(this.accountTypeFillForm, obj, { headers: this.httpBuildOptions() })
+      .post(this.accountTypeFillForm, obj, { headers: this.headers })
       .pipe();
   }
 
   AccountTypeSave(obj: AccountTypeModel): Observable<{}> {
     switch (obj.Id) {
       case 0:
-        return this.http.post(this.accountTypeSave, obj).pipe();
+        return this.http
+          .post(this.accountTypeSave, obj, { headers: this.headers })
+          .pipe();
       default:
-        return this.http.put(this.accountTypeSave, obj).pipe();
+        return this.http
+          .put(this.accountTypeSave, obj, { headers: this.headers })
+          .pipe();
     }
   }
 
   AccountGet(): Observable<{}> {
-    return this.http.get(this.accountGet).pipe();
+    return this.http.get(this.accountGet, { headers: this.headers }).pipe();
   }
 
   AccountGetById(obj: AccountModel): Observable<{}> {
     return this.http
-      .post(this.accountFillForm, obj, { headers: this.httpBuildOptions() })
+      .post(this.accountFillForm, obj, { headers: this.headers })
       .pipe();
   }
 
   AccountSave(obj: AccountModel): Observable<{}> {
     switch (obj.Id) {
       case 0:
-        return this.http.post(this.accountSave, obj).pipe();
+        return this.http
+          .post(this.accountSave, obj, { headers: this.headers })
+          .pipe();
       default:
-        return this.http.put(this.accountSave, obj).pipe();
+        return this.http
+          .put(this.accountSave, obj, { headers: this.headers })
+          .pipe();
     }
   }
 
   IncomeTypeGet(): Observable<{}> {
-    return this.http.get(this.incomeTypeGet).pipe();
+    return this.http.get(this.incomeTypeGet, { headers: this.headers }).pipe();
   }
 
   IncomeTypeGetById(obj: IncomeTypeModel): Observable<{}> {
     return this.http
-      .post(this.incomeTypeFillForm, obj, { headers: this.httpBuildOptions() })
+      .post(this.incomeTypeFillForm, obj, { headers: this.headers })
       .pipe();
   }
 
   IncomeTypeSave(obj: IncomeTypeModel): Observable<{}> {
     switch (obj.Id) {
       case 0:
-        return this.http.post(this.incomeTypeSave, obj).pipe();
+        return this.http
+          .post(this.incomeTypeSave, obj, { headers: this.headers })
+          .pipe();
       default:
-        return this.http.put(this.incomeTypeSave, obj).pipe();
+        return this.http
+          .put(this.incomeTypeSave, obj, { headers: this.headers })
+          .pipe();
     }
   }
 
   IncomeGet(): Observable<{}> {
-    return this.http.get(this.incomeGet).pipe();
+    console.log(this.headers);
+    return this.http.get(this.incomeGet, { headers: this.headers }).pipe();
   }
 
   IncomeGetById(obj: IncomeModel): Observable<{}> {
+    console.log(this.headers);
     return this.http
-      .post(this.incomeFillForm, obj, { headers: this.httpBuildOptions() })
+      .post(this.incomeFillForm, obj, { headers: this.headers })
       .pipe();
   }
 
   IncomeSave(obj: IncomeModel): Observable<{}> {
     switch (obj.Id) {
       case 0:
-        return this.http.post(this.incomeSave, obj).pipe();
+        return this.http
+          .post(this.incomeSave, obj, { headers: this.headers })
+          .pipe();
       default:
-        return this.http.put(this.incomeSave, obj).pipe();
+        return this.http
+          .put(this.incomeSave, obj, { headers: this.headers })
+          .pipe();
     }
   }
 
   ExpenseTypeGet(): Observable<{}> {
-    return this.http.get(this.expenseTypeGet).pipe();
+    return this.http.get(this.expenseTypeGet, { headers: this.headers }).pipe();
   }
 
   ExpenseTypeGetById(obj: ExpenseTypeModel): Observable<{}> {
     return this.http
-      .post(this.expenseTypeFillForm, obj, { headers: this.httpBuildOptions() })
+      .post(this.expenseTypeFillForm, obj, { headers: this.headers })
       .pipe();
   }
 
   ExpenseTypeSave(obj: ExpenseTypeModel): Observable<{}> {
     switch (obj.Id) {
       case 0:
-        return this.http.post(this.expenseTypeSave, obj).pipe();
+        return this.http
+          .post(this.expenseTypeSave, obj, { headers: this.headers })
+          .pipe();
       default:
-        return this.http.put(this.expenseTypeSave, obj).pipe();
+        return this.http
+          .put(this.expenseTypeSave, obj, { headers: this.headers })
+          .pipe();
     }
   }
 
   ExpenseGet(): Observable<{}> {
-    return this.http.get(this.expenseGet).pipe();
+    return this.http.get(this.expenseGet, { headers: this.headers }).pipe();
   }
 
   ExpenseGetById(obj: ExpenseModel): Observable<{}> {
     return this.http
-      .post(this.expenseFillForm, obj, { headers: this.httpBuildOptions() })
+      .post(this.expenseFillForm, obj, { headers: this.headers })
       .pipe();
   }
 
   ExpenseSave(obj: ExpenseModel): Observable<{}> {
     switch (obj.Id) {
       case 0:
-        return this.http.post(this.expenseSave, obj).pipe();
+        return this.http
+          .post(this.expenseSave, obj, { headers: this.headers })
+          .pipe();
       default:
-        return this.http.put(this.expenseSave, obj).pipe();
+        return this.http
+          .put(this.expenseSave, obj, { headers: this.headers })
+          .pipe();
     }
   }
 }
