@@ -68,7 +68,7 @@ export class ApiService {
 
   headers = new HttpHeaders()
     .set("Content-Type", "application/json")
-    .set("Authorization", `Bearer ${this.auth.getToken()}`);
+    // .set("Authorization", `Bearer ${this.auth.getToken()}`);
 
   UserLogin(obj: LoginModel): Observable<{}> {
     return this.http.post(this.login, obj, { headers: this.headers }).pipe();

@@ -22,7 +22,6 @@ export class DataTransferService {
       next: (m: any) => (message = m),
       complete: () => {}
     });
-    
     return message;
   }
 }
