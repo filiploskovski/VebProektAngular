@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  ViewChild
+} from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AccountModel } from "src/app/models/AccountModel";
 import { ApiService } from "src/app/services/api.service";
@@ -8,9 +14,9 @@ import { IncomeModel } from "src/app/models/IncomeModel";
 import { IGenericComponent } from "src/app/Interface/IGenericComponent";
 import { DeleteModel } from "src/app/models/DeleteModel";
 import { Subject } from "rxjs";
-import { DatePipe } from '@angular/common';
-import { DataTableDirective } from 'angular-datatables';
-import { DataTransferService } from 'src/app/services/data-transfer.service';
+import { DatePipe } from "@angular/common";
+import { DataTableDirective } from "angular-datatables";
+import { DataTransferService } from "src/app/services/data-transfer.service";
 
 @Component({
   selector: "app-income",
@@ -19,10 +25,9 @@ import { DataTransferService } from 'src/app/services/data-transfer.service';
   providers: [DatePipe]
 })
 export class IncomeComponent
-  implements OnInit,AfterViewInit ,OnDestroy, IGenericComponent<IncomeModel> {
-  
+  implements OnInit, AfterViewInit, OnDestroy, IGenericComponent<IncomeModel> {
   // DataTable
-  @ViewChild(DataTableDirective, {static: true})
+  @ViewChild(DataTableDirective, { static: true })
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -45,12 +50,18 @@ export class IncomeComponent
   });
 
   // Delete
-  deleteModel: DeleteModel = {Id: 0, Name: ""};
+  deleteModel: DeleteModel = { Id: 0, Name: "" };
 
-  constructor(private api: ApiService, private notify: NotifyService, private datePipe: DatePipe,private dataTransfer: DataTransferService) {}
+  constructor(
+    private api: ApiService,
+    private notify: NotifyService,
+    private datePipe: DatePipe,
+    private dataTransfer: DataTransferService
+  ) {}
 
   ngOnInit() {
-    this.pageLoad(this.dataTransfer.readMessage());
+    let dataTransfer = this.dataTransfer.readMessage();
+    this.pageLoad((0 === dataTransfer.length) ? null : dataTransfer);
   }
 
   ngAfterViewInit(): void {
@@ -94,6 +105,7 @@ export class IncomeComponent
 
   GetById(id: number): void {
     const entity = new IncomeModel(id);
+    console.log(entity);
     this.api.IncomeGetById(entity).subscribe({
       next: (model: IncomeModel) => {
         this.incomeForm.patchValue({
@@ -103,7 +115,7 @@ export class IncomeComponent
           AccountId: model.AccountId,
           IncomeTypeId: model.IncomeTypeId,
           Amount: model.Amount,
-          Date: this.datePipe.transform(model.Date, 'yyyy-MM-dd')
+          Date: this.datePipe.transform(model.Date, "yyyy-MM-dd")
         });
       }
     });
@@ -137,6 +149,4 @@ export class IncomeComponent
       this.dtTrigger.next();
     });
   }
-
-  
 }

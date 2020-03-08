@@ -11,6 +11,10 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  isLoggedIn() : boolean {
+    return localStorage.getItem('token') != null;
+  }
+
   setToken(token: string): void {
     localStorage.removeItem('token');
     localStorage.setItem('token', token);

@@ -152,12 +152,10 @@ export class ApiService {
   }
 
   IncomeGet(): Observable<{}> {
-    console.log(this.headers);
     return this.http.get(this.incomeGet, { headers: this.headers }).pipe();
   }
 
   IncomeGetById(obj: IncomeModel): Observable<{}> {
-    console.log(this.headers);
     return this.http
       .post(this.incomeFillForm, obj, { headers: this.headers })
       .pipe();

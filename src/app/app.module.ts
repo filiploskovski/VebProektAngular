@@ -22,6 +22,7 @@ import { ExpenseComponent } from "./components/expense/expense.component";
 import { AccountDetailsComponent } from "./components/account-details/account-details.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { AuthInterceptor } from "./Interseptors/HttpInterceptor";
+import { HttpErrorInterceptor } from './Interseptors/HttpErrorInterceptor';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,12 @@ import { AuthInterceptor } from "./Interseptors/HttpInterceptor";
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
+      useClass: AuthInterceptor, 
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor, 
       multi: true
     }
   ],

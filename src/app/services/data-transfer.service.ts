@@ -17,11 +17,17 @@ export class DataTransferService {
 
   // ReadMessage
   readMessage(): any {
-    let message = "";
+    let message = null;
     this.currentMessage.subscribe({
       next: (m: any) => (message = m),
       complete: () => {}
     });
+
+    setTimeout(() => {
+      this.setMessage("");
+    }, 150);
+
+    console.log("Poraka", message);
     return message;
   }
 }

@@ -58,7 +58,8 @@ export class ExpenseComponent
   ) {}
 
   ngOnInit() {
-    this.pageLoad(this.dataTransfer.readMessage());
+    let dataTransfer = this.dataTransfer.readMessage();
+    this.pageLoad((0 === dataTransfer.length) ? null : dataTransfer);
   }
 
   ngAfterViewInit(): void {
