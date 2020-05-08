@@ -1,0 +1,52 @@
+BAZA:
+		1. User
+		2. Account
+		3. Account Type
+		4. Regular Expense
+		5. Expense type
+		6. Debt
+		7. Income (da se definiraat)
+		8. Income Type (da se definiraat)
+		
+
+	Debt:
+	Debt type		FK_ACCOUNT			Due Date		Kamata		Sum				PaidOut			Leftover		MonthlySum
+	KreditStan		AccID				12.03.2034		5%			1.000.000		200.000			800.000			1.200
+
+	Regular_Expense:
+	FK_ACCOUNT		FK_EXPENSE_TYPE	  Name		Date		   	Amount			
+	AccID			        1						  Voda		20061996    1.000			
+
+
+	Expense_Type:
+	ID    FK_USER			Name
+	1			            Shopping
+	2			            Bill
+	3			            Leisure
+
+	Account:
+	ID			FK_USER	 FK_AccType		Amount		Date isDefault
+
+	Account_Type:
+	ID    FK_USER			Name
+	1			            Cash
+	2			            DebitCard
+	3			            CreditCard
+  
+  Income_Type:
+	ID    FK_USER			Name
+	1			            Cash
+	2			            DebitCard
+	3			            CreditCard
+  
+  
+  Income:
+	ID    FK_Acc			Name          Amount      Date     IsMonthly
+	1			            Plata
+	2			            Ednokratno Dopuna
+	3			            Kazino
+	3			            Kirija                                YES
+  
+  
+  
+  Vo ova e dobro da se implementira i zaseben dms sistem na koj so userot ke moze da si zakacuva smetki fakturi ili so bilo
