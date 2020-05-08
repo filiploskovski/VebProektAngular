@@ -13,9 +13,9 @@ export class RegisterComponent implements OnInit {
 
   registerForm = new FormGroup({
     Username: new FormControl('', [Validators.required]),
-    Email: new FormControl('', [Validators.required]),
-    Password: new FormControl('', [Validators.required]),
-    ConfirmPassword: new FormControl('',[Validators.required])
+    Email: new FormControl('', [Validators.required,Validators.email]),
+    Password: new FormControl('', [Validators.required,Validators.minLength(6)]),
+    ConfirmPassword: new FormControl('',[Validators.required,Validators.minLength(6)])
   });
 
   constructor(private api : ApiService,private router: Router) { }
@@ -24,11 +24,14 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-    this.api.UserRegister(this.registerForm.value as RegisterModel).subscribe({
-      complete: () => this.router.navigate(['/login']),
-      error: (a: any) => console.log(a)
-      
-    })
+    if(this.registerForm.value.Password != this.registerForm.value.ConfirmPassword){
+      window.alert("Password and Password Confirm are not the same");
+    }else{
+      this.api.UserRegister(this.registerForm.value as RegisterModel).subscribe({
+        complete: () => this.router.navigate(['/login']),
+        error: (a: any) => console.log(a)
+      })
+    }
   }
   
 

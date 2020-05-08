@@ -141,6 +141,13 @@ export class IncomeComponent
 
   delete(id: number) {
     console.log(id);
+    this.api.IncomeDelete(id).subscribe({
+      next: () => {},
+      complete: () => {
+        this.pageLoad();
+        this.notify.showDefaultSuccess();
+      }
+    });
   }
 
   rerender(): void {

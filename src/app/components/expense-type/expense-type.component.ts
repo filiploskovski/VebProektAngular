@@ -76,6 +76,13 @@ export class ExpenseTypeComponent implements OnInit,AfterViewInit,IGenericCompon
 
   delete(id: number) {
     console.log(id);
+    this.api.ExpenseTypeDelete(id).subscribe({
+      next: () => {},
+      complete: () => {
+        this.pageLoad();
+        this.notify.showDefaultSuccess();
+      }
+    });
   }
 
   Get(): void {

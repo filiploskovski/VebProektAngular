@@ -74,6 +74,13 @@ export class AccountTypeComponent implements OnInit, OnDestroy, IGenericComponen
 
   delete(id: number) {
     console.log(id);
+    this.api.AccountTypeDelete(id).subscribe({
+      next: () => {},
+      complete: () => {
+        this.pageLoad();
+        this.notify.showDefaultSuccess();
+      }
+    });
   }
 
   Get(): void {

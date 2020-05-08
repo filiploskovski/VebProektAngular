@@ -19,48 +19,48 @@ export class ApiService {
   private apiUrl = environment.apiUrl;
 
   //User Register
-  private login = `${this.apiUrl}/user/login`;
+  public login = `${this.apiUrl}/user/login`;
 
   //User Register
-  private register = `${this.apiUrl}/user/register`;
+  public register = `${this.apiUrl}/user/register`;
 
   // Dashboard
   private dashboard = `${this.apiUrl}/home/dashboard`;
 
   // Account Type
   private accountTypeSave = `${this.apiUrl}/account-type`;
-  private accountTypeDelete = `${this.apiUrl}/account-type`;
+  private accountTypeDelete = `${this.apiUrl}/account-type?id=`;
   private accountTypeFillForm = `${this.apiUrl}/account-type/get-by-id`;
   private accountTypeGet = `${this.apiUrl}/account-type/get`;
 
   // Account
   private accountSave = `${this.apiUrl}/account`;
-  private accountDelete = `${this.apiUrl}/account`;
+  private accountDelete = `${this.apiUrl}/account?id=`;
   private accountFillForm = `${this.apiUrl}/account/get-by-id`;
   private accountGet = `${this.apiUrl}/account/get`;
 
   // Income Type
   private incomeTypeSave = `${this.apiUrl}/income-type`;
-  private incomeTypeDelete = `${this.apiUrl}/income-type`;
+  private incomeTypeDelete = `${this.apiUrl}/income-type?id=`;
   private incomeTypeFillForm = `${this.apiUrl}/income-type/get-by-id`;
   private incomeTypeGet = `${this.apiUrl}/income-type/get`;
 
   // Income
   private incomeSave = `${this.apiUrl}/income`;
-  private incomeDelete = `${this.apiUrl}/income`;
+  private incomeDelete = `${this.apiUrl}/income?id=`;
   private incomeFillForm = `${this.apiUrl}/income/get-by-id`;
   private incomeGet = `${this.apiUrl}/income/get`;
   private incomeGetTopThreeByDate = `${this.apiUrl}/income/get-top-three`;
 
   // Expense Type
   private expenseTypeSave = `${this.apiUrl}/expense-type`;
-  private expenseTypeDelete = `${this.apiUrl}/expense-type`;
+  private expenseTypeDelete = `${this.apiUrl}/expense-type?id=`;
   private expenseTypeFillForm = `${this.apiUrl}/expense-type/get-by-id`;
   private expenseTypeGet = `${this.apiUrl}/expense-type/get`;
 
   // Expense
   private expenseSave = `${this.apiUrl}/expense`;
-  private expenseDelete = `${this.apiUrl}/expense`;
+  private expenseDelete = `${this.apiUrl}/expense?id=`;
   private expenseFillForm = `${this.apiUrl}/expense/get-by-id`;
   private expenseGet = `${this.apiUrl}/expense/get`;
 
@@ -68,7 +68,7 @@ export class ApiService {
 
   headers = new HttpHeaders()
     .set("Content-Type", "application/json")
-    // .set("Authorization", `Bearer ${this.auth.getToken()}`);
+    //.set("Authorization", `Bearer ${this.auth.getToken()}`);
 
   UserLogin(obj: LoginModel): Observable<{}> {
     return this.http.post(this.login, obj, { headers: this.headers }).pipe();
@@ -105,6 +105,12 @@ export class ApiService {
     }
   }
 
+  AccountTypeDelete(obj: Number): Observable<{}> {
+    return this.http
+          .delete(`${this.accountTypeDelete}${obj}`, { headers: this.headers })
+          .pipe();
+  }
+
   AccountGet(): Observable<{}> {
     return this.http.get(this.accountGet, { headers: this.headers }).pipe();
   }
@@ -126,6 +132,12 @@ export class ApiService {
           .put(this.accountSave, obj, { headers: this.headers })
           .pipe();
     }
+  }
+
+  AccountDelete(obj: Number): Observable<{}> {
+    return this.http
+          .delete(`${this.accountDelete}${obj}`, { headers: this.headers })
+          .pipe();
   }
 
   IncomeTypeGet(): Observable<{}> {
@@ -151,6 +163,12 @@ export class ApiService {
     }
   }
 
+  IncomeTypeDelete(obj: Number): Observable<{}> {
+    return this.http
+          .delete(`${this.incomeTypeDelete}${obj}`, { headers: this.headers })
+          .pipe();
+  }
+
   IncomeGet(): Observable<{}> {
     return this.http.get(this.incomeGet, { headers: this.headers }).pipe();
   }
@@ -172,6 +190,12 @@ export class ApiService {
           .put(this.incomeSave, obj, { headers: this.headers })
           .pipe();
     }
+  }
+
+  IncomeDelete(obj: Number): Observable<{}> {
+    return this.http
+          .delete(`${this.incomeDelete}${obj}`, { headers: this.headers })
+          .pipe();
   }
 
   ExpenseTypeGet(): Observable<{}> {
@@ -197,6 +221,12 @@ export class ApiService {
     }
   }
 
+  ExpenseTypeDelete(obj: Number): Observable<{}> {
+    return this.http
+          .delete(`${this.expenseTypeDelete}${obj}`, { headers: this.headers })
+          .pipe();
+  }
+
   ExpenseGet(): Observable<{}> {
     return this.http.get(this.expenseGet, { headers: this.headers }).pipe();
   }
@@ -218,5 +248,11 @@ export class ApiService {
           .put(this.expenseSave, obj, { headers: this.headers })
           .pipe();
     }
+  }
+
+  ExpensetDelete(obj: Number): Observable<{}> {
+    return this.http
+          .delete(`${this.expenseDelete}${obj}`, { headers: this.headers })
+          .pipe();
   }
 }

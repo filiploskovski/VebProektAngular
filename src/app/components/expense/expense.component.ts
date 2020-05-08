@@ -138,6 +138,13 @@ export class ExpenseComponent
 
   delete(id: number) {
     console.log(id);
+    this.api.ExpensetDelete(id).subscribe({
+      next: () => {},
+      complete: () => {
+        this.pageLoad();
+        this.notify.showDefaultSuccess();
+      }
+    });
   }
 
   rerender(): void {

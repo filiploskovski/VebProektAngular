@@ -71,6 +71,13 @@ export class IncomeTypeComponent
 
   delete(id: number) {
     console.log(id);
+    this.api.IncomeTypeDelete(id).subscribe({
+      next: () => {},
+      complete: () => {
+        this.pageLoad();
+        this.notify.showDefaultSuccess();
+      }
+    });
   }
 
   Get(): void {

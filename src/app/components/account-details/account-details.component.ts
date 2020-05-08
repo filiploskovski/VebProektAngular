@@ -31,7 +31,7 @@ export class AccountDetailsComponent implements OnInit,AfterViewInit {
 
   accountForm = new FormGroup({
     Id: new FormControl(0),
-    AccountTypeId: new FormControl('', [Validators.required]),
+    AccountTypeId: new FormControl({value: ''}, [Validators.required]),
     Name: new FormControl('', [Validators.required]),
     Amount: new FormControl('', [Validators.required]),
     IsDefault: new FormControl('',[Validators.required])

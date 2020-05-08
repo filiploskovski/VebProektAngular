@@ -12,8 +12,8 @@ import { LoginModel } from "src/app/models/LoginModel";
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
-    username: new FormControl("Filip Loshkovski"),
-    password: new FormControl("Qwerty1$")
+    username: new FormControl(""),
+    password: new FormControl("")
   });
 
   constructor(
